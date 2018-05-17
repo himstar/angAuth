@@ -40,8 +40,8 @@
                             </div>
                             <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
                                 <div *ngIf="password.errors.required">Password Required</div>
-                                <div *ngIf="password.errors.minlength">Password should be min {{password.errors.minlength.requiredLength}} character long</div>
-                                <div *ngIf="password.errors.maxlength">Password Should not exceed more than {{password.errors.maxlength.requiredLength}} character</div>
+                                <div *ngIf="password.errors.minlength">Password needs to be more than {{password.errors.minlength.requiredLength}} characters</div>
+                                <div *ngIf="password.errors.maxlength">Password needs to be less than {{password.errors.maxlength.requiredLength}} characters</div>
                             </div>                                                                             
                           </div>
                       </div>
@@ -59,7 +59,7 @@
                           </div>
                       </div>
                       <div class="col-md-4">
-                          <form  [(formGroup)]="form">
+                          <form  [(formGroup)]="registerForm" (ngSubmit)="onFormSubmit()">
                               <div class="card card-plain">
                                   <div class="content">
                                       <div class="form-group">
@@ -73,7 +73,7 @@
                                       </div>                            
                                   </div>
                                   <div class="footer text-center">
-                                      <button type="button" class="btn btn-fill btn-danger btn-wd" id="btnRegister">Login Account</button>
+                                      <button type="submit" class="btn btn-fill btn-danger btn-wd">Register Account</button>
                                   </div>
                               </div>
                           </form>

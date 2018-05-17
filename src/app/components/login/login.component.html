@@ -1,0 +1,94 @@
+<nav class="navbar navbar-transparent navbar-absolute">
+  <div class="container">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle navbar-toggle-black" data-toggle="collapse" data-target="#navigation-example-2">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar "></span>
+              <span class="icon-bar "></span>
+              <span class="icon-bar"></span>
+          </button>
+      </div>
+      <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+              <li>
+                 <a href="login" class="btn">
+                      New User?
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav>
+<div class="wrapper wrapper-full-page">
+  <div class="register-page">
+      <div class="content">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+                      <div class="header-text">
+                          <h2>rAuth - Login</h2>
+                          <h4>Login for free and experience the dashboard today.</h4>
+                          <hr>
+                        <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+                            <div *ngIf="email.errors.required">Email Required</div>
+                            <div *ngIf="email.errors.email">Not a valid email type</div>
+                        </div>
+                        <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+                            <div *ngIf="password.errors.required">Password Required</div>
+                         </div>                                                                             
+                      </div>
+                  </div>
+                  <div class="col-md-4 col-md-offset-2">
+                      <div class="media">
+                          <div class="media-left">
+                              <div class="icon icon-warning">
+                                  <i class="ti-bar-chart-alt"></i>
+                              </div>
+                          </div>
+                          <div class="media-body">
+                              <h5>Awesome Performances</h5>
+                              Here you can write a feature description for your dashboard, let the users know what is the value that you give them.
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <form  [(formGroup)]="loginForm" (ngSubmit)="onFormSubmit()">
+                          <div class="card card-plain">
+                              <div class="content">                                 
+                                  <div class="form-group">
+                                      <input type="email" formControlName="email" id="email" placeholder="Enter email" class="form-control">
+                                  </div>
+                                  <div class="form-group">
+                                      <input type="password" formControlName="password" id="password" placeholder="Enter Password" class="form-control">
+                                  </div>                            
+                              </div>
+                              <div class="footer text-center">
+                                  <button type="submit" class="btn btn-fill btn-danger btn-wd">Login Account</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <footer class="footer footer-transparent">
+          <div class="container">
+              <div class="copyright text-center">
+                  &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> in India
+              </div>
+          </div>
+      </footer>
+      <script>
+            function pushAlert(message){
+                $.notify({
+                    icon: 'ti-gift',
+                    message: message
+                },{
+                    type: 'success',
+                    timer: 4000
+                }); 
+            }         
+      </script>
+  </div>
+</div>
