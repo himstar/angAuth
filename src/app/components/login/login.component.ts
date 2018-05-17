@@ -36,11 +36,12 @@ export class LoginComponent implements OnInit {
         this.user = this.loginForm.value;
         this.authService.login(this.user)
         .subscribe(result => {
-          if (result.message == "success") {
+          console.log(result.message);
+          if ((result.message == "success") && (result.token)){
+              localStorage.setItem('token', result.token)
               this.router.navigate(['/']);
-              console.log(result);
           }
-          else if(result.message == "invalid"){
+          else if(result.message == "Unauthorized Access"){
             this.invalidLogin = true;
             console.log(result);
           } else {

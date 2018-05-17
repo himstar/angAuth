@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" *ngIf="authService.isLoggedIn()">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle">
@@ -36,6 +36,12 @@
                     <a href="#">
                         <i class="ti-settings"></i>
                         <p>Settings</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="" (click)="authService.logout()">
+                        <i class="ti-settings"></i>
+                        <p>Logout</p>
                     </a>
                 </li>
             </ul>
