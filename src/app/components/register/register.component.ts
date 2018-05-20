@@ -37,7 +37,6 @@ export class RegisterComponent implements OnInit {
    onFormSubmit() {
     if(this.registerForm.valid) {
         this.user = this.registerForm.value;
-        console.log(this.user);
         this.authService.register(this.user)
         .subscribe(result => {
           if (result.message == "success") {
@@ -56,6 +55,9 @@ export class RegisterComponent implements OnInit {
 }
 
   ngOnInit() {
+    if(this.authService.isLoggedIn()){
+      this.router.navigate(['/dashboard']);
+    }    
   }
 
 }

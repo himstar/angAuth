@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   user: any[];
 
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
     password: new FormControl('', [Validators.required])
   });
 
@@ -36,14 +36,12 @@ export class LoginComponent implements OnInit {
         this.user = this.loginForm.value;
         this.authService.login(this.user)
         .subscribe(result => {
-          console.log(result.message);
           if ((result.message == "success") && (result.token)){
               localStorage.setItem('token', result.token)
-              this.router.navigate(['/']);
+              this.router.navigate(['/dashboard']);
           }
           else if(result.message == "Unauthorized Access"){
             this.invalidLogin = true;
-            console.log(result);
           } else {
             this.invalidLogin = true;
             console.log(result);
@@ -51,10 +49,12 @@ export class LoginComponent implements OnInit {
         });
     } else {
       this.user = this.loginForm.value;
-      console.log
     }
 }
 
   ngOnInit() {
+    if(this.authService.isLoggedIn()){
+      this.router.navigate(['/dashboard']);
+    }
   }
 }

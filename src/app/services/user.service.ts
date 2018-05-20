@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Http} from '@angular/http';
-import { BehaviorSubject} from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/map'
+import { JwtHelper, tokenNotExpired } from 'angular2-jwt';
+import { Http } from '@angular/http';
+import { Router } from "@angular/router";
 
 @Injectable()
 export class UserService {
 
-  constructor(private http: Http) {}
-
-  register(user){
-    return this.http.post('http://159.65.151.126/api/user/add', user)
-      .map(res => res.json());
-  }
-
-  login(user){
-    return this.http.post('http://159.65.151.126/api/user/login', user)
-      .map(res => res.json());
+  constructor(
+    private http: Http,
+    private router: Router
+  ) { }
+  getUser(user){
+    return this.http.get('http://localhost:3200/api/user/'+user);
   }
 }
