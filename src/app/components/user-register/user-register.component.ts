@@ -5,17 +5,17 @@ import { Router } from "@angular/router";
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './Register.component.html',
-  styleUrls: ['./Register.component.css']
+  selector: 'app-user-register',
+  templateUrl: './user-register.component.html',
+  styleUrls: ['./user-register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class UserRegisterComponent implements OnInit {
   invalidRegister: boolean;
   user: any[];
 
   registerForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
-    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)])
   });
 
@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
         this.authService.register(this.user)
         .subscribe(result => {
           if (result.message == "success") {
-              this.router.navigate(['/']);
+              this.router.navigate(['u/login']);
           }
           else if(result.message == "alreadyRegistered"){
             this.invalidRegister = true;
@@ -50,13 +50,12 @@ export class RegisterComponent implements OnInit {
         });
     } else {
       this.user = this.registerForm.value;
-      console.log
     }
 }
 
   ngOnInit() {
     if(this.authService.isLoggedIn()){
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['u/dashboard']);
     }    
   }
 

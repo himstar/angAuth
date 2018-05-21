@@ -5,11 +5,11 @@ import { Router } from "@angular/router";
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-user-login',
+  templateUrl: './user-login.component.html',
+  styleUrls: ['./user-login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class UserLoginComponent implements OnInit {
 
   invalidLogin: boolean;
   user: any[];
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         .subscribe(result => {
           if ((result.message == "success") && (result.token)){
               localStorage.setItem('token', result.token)
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['u/dashboard']);
           }
           else if(result.message == "Unauthorized Access"){
             this.invalidLogin = true;

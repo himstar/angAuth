@@ -3,18 +3,28 @@ import { JwtHelper, tokenNotExpired } from 'angular2-jwt';
 import { Http } from '@angular/http';
 import { Router } from "@angular/router";
 import 'rxjs/add/operator/map';
+import { ApiUrlService } from '../config/api-url.service';
 
 @Injectable()
 export class AuthService {
-
-  constructor(private http: Http, private router: Router) { }
+  url : any;
+  port: Number;
+  constructor(
+    private http: Http,
+    private router: Router,
+    private apiUrl: ApiUrlService
+  ) { }
   register(user){
-    return this.http.post('http://localhost:3200/api/user/register', user)
+    this.url = this.apiUrl.url;
+    this.port = this.apiUrl.port;
+    return this.http.post(this.url+':'+this.port+'/api/user/register', user)
       .map(response => response.json());
   }
 
   login(user){
-    return this.http.post('http://localhost:3200/api/user/login', user)
+    this.url = this.apiUrl.url;
+    this.port = this.apiUrl.port;    
+    return this.http.post(this.url+':'+this.port+'/api/user/login', user)
       .map(response => response.json());
   }
 

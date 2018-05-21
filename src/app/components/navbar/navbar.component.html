@@ -16,13 +16,16 @@
             </div>
             <div class="col-lg-9 col-6">
                 <ul id="top_access">
-                    <li><a href="login.html" *ngIf="authService.isLoggedIn()"><i class="pe-7s-user"></i></a></li>
-                    <li><a href="#" *ngIf="authService.isLoggedIn()" (click)="authService.logout()"><i class="pe-7s-power"></i></a></li>
+                    <li><a [routerLink]="['u/dashboard']" *ngIf="authService.isLoggedIn()"><i class="pe-7s-user"></i></a></li>
+                    <li><a href="" *ngIf="authService.isLoggedIn()" (click)="authService.logout()"><i class="pe-7s-power"></i></a></li>
                 </ul>
                 <nav id="menu" class="main-menu">
                     <ul>
                         <li>
-                            <a [routerLink]="['/login']" *ngIf="!authService.isLoggedIn()"> Account </a>
+                            <span><a [routerLink]="['u/login']" *ngIf="!authService.isLoggedIn()"> for User </a></span>
+                        </li>                        
+                        <li>
+                                <span><a [routerLink]="['c/login']" *ngIf="!authService.isLoggedIn()"> for Company </a></span>
                         </li>
                     </ul>
                 </nav>

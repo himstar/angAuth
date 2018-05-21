@@ -9,28 +9,33 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { RegisterComponent } from './components/register/register.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthService } from './services/auth.service';
-import { LoginComponent } from './components/login/login.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGaurdService } from './services/auth-gaurd.service';
 import { AdminHeaderComponent } from './common/admin-header/admin-header.component';
 import { AdminFooterComponent } from './common/admin-footer/admin-footer.component';
 import { UserService } from './services/user.service';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ApiUrlService } from './config/api-url.service';
+import { CompanyRegisterComponent } from './components/company-register/company-register.component';
+import { CompanyLoginComponent } from './components/company-login/company-login.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'u/register', component: UserRegisterComponent},
+  {path: 'u/login', component: UserLoginComponent},
+  {path: 'c/register', component: CompanyRegisterComponent},
+  {path: 'c/login', component: CompanyLoginComponent},
   {
     path: 'u/profile',
     component: UserProfileComponent,
     canActivate: [AuthGaurdService]
   },
   {
-    path: 'dashboard',
+    path: 'u/dashboard',
     component: DashboardComponent,
     canActivate: [AuthGaurdService]
   }
@@ -41,13 +46,15 @@ const appRoutes: Routes = [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    RegisterComponent,
-    LoginComponent,
+    UserLoginComponent,
     DashboardComponent,
     HomeComponent,
     AdminHeaderComponent,
     AdminFooterComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UserRegisterComponent,
+    CompanyRegisterComponent,
+    CompanyLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +64,12 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthService, AuthGaurdService, UserService],
+  providers: [
+    AuthService,
+    AuthGaurdService, 
+    UserService,
+    ApiUrlService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
