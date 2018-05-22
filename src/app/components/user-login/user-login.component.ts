@@ -19,28 +19,28 @@ export class UserLoginComponent implements OnInit {
     password: new FormControl('', [Validators.required])
   });
 
-  get email(){
+  get email() {
     return this.loginForm.get('email');
   }
-  get password(){
+  get password() {
     return this.loginForm.get('password');
   }
-  
+
   constructor(
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) { }
 
-   onFormSubmit() {
-    if(this.loginForm.valid) {
-        this.user = this.loginForm.value;
-        this.authService.login(this.user)
+  onFormSubmit() {
+    if (this.loginForm.valid) {
+      this.user = this.loginForm.value;
+      this.authService.userLogin(this.user)
         .subscribe(result => {
-          if ((result.message == "success") && (result.token)){
-              localStorage.setItem('token', result.token)
-              this.router.navigate(['u/dashboard']);
+          if ((result.message == "success") && (result.token)) {
+            localStorage.setItem('token', result.token)
+            this.router.navigate(['u/dashboard']);
           }
-          else if(result.message == "Unauthorized Access"){
+          else if (result.message == "Unauthorized Access") {
             this.invalidLogin = true;
           } else {
             this.invalidLogin = true;
@@ -50,11 +50,11 @@ export class UserLoginComponent implements OnInit {
     } else {
       this.user = this.loginForm.value;
     }
-}
+  }  
 
   ngOnInit() {
-    if(this.authService.isLoggedIn()){
-      this.router.navigate(['/dashboard']);
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['u/dashboard']);
     }
   }
 }

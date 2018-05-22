@@ -14,17 +14,32 @@ export class AuthService {
     private router: Router,
     private apiUrl: ApiUrlService
   ) { }
-  register(user){
+
+  userRegister(user){
     this.url = this.apiUrl.url;
     this.port = this.apiUrl.port;
     return this.http.post(this.url+':'+this.port+'/api/user/register', user)
       .map(response => response.json());
   }
 
-  login(user){
+  userLogin(user){
     this.url = this.apiUrl.url;
     this.port = this.apiUrl.port;    
     return this.http.post(this.url+':'+this.port+'/api/user/login', user)
+      .map(response => response.json());
+  }
+
+  companyRegister(company){
+    this.url = this.apiUrl.url;
+    this.port = this.apiUrl.port;
+    return this.http.post(this.url+':'+this.port+'/api/company/register', company)
+      .map(response => response.json());
+  }
+
+  companyLogin(company){
+    this.url = this.apiUrl.url;
+    this.port = this.apiUrl.port;    
+    return this.http.post(this.url+':'+this.port+'/api/company/login', company)
       .map(response => response.json());
   }
 

@@ -37,7 +37,7 @@ export class UserRegisterComponent implements OnInit {
    onFormSubmit() {
     if(this.registerForm.valid) {
         this.user = this.registerForm.value;
-        this.authService.register(this.user)
+        this.authService.userRegister(this.user)
         .subscribe(result => {
           if (result.message == "success") {
               this.router.navigate(['u/login']);
