@@ -38,7 +38,7 @@ export class CompanyLoginComponent implements OnInit {
         .subscribe(result => {
           if ((result.message == "success") && (result.token)) {
             localStorage.setItem('token', result.token)
-            this.router.navigate(['u/dashboard']);
+            this.router.navigate(['c/dashboard']);
           }
           else if (result.message == "Unauthorized Access") {
             this.invalidLogin = true;
@@ -54,7 +54,7 @@ export class CompanyLoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['u/dashboard']);
+      this.router.navigate(['c/dashboard']);
     }
   }
 

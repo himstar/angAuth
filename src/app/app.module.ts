@@ -13,15 +13,21 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthService } from './services/auth.service';
 import { UserLoginComponent } from './components/user-login/user-login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGaurdService } from './services/auth-gaurd.service';
-import { AdminHeaderComponent } from './common/admin-header/admin-header.component';
-import { AdminFooterComponent } from './common/admin-footer/admin-footer.component';
+import { DashboardHeaderComponent } from './common/dashboard-header/dashboard-header.component';
+import { DashboardFooterComponent } from './common/dashboard-footer/dashboard-footer.component';
 import { UserService } from './services/user.service';
 import { ApiUrlService } from './config/api-url.service';
 import { CompanyRegisterComponent } from './components/company-register/company-register.component';
 import { CompanyLoginComponent } from './components/company-login/company-login.component';
+import { CompanyDashboardComponent } from './components/company-dashboard/company-dashboard.component';
+import { CompanyService } from './services/company.service';
+import { CompanyAuthGaurdService } from './services/company-auth-gaurd.service';
+import { NoAccessComponent } from './common/no-access/no-access.component';
+import { UserAuthGaurdService } from './services/user-auth-gaurd.service';
+import { Error404Component } from './common/error-404/error-404.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -29,16 +35,24 @@ const appRoutes: Routes = [
   {path: 'u/login', component: UserLoginComponent},
   {path: 'c/register', component: CompanyRegisterComponent},
   {path: 'c/login', component: CompanyLoginComponent},
+  {path: 'no-access', component: NoAccessComponent},
   {
     path: 'u/profile',
     component: UserProfileComponent,
-    canActivate: [AuthGaurdService]
+    canActivate: [AuthGaurdService, UserAuthGaurdService]
   },
   {
     path: 'u/dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGaurdService]
-  }
+    component: UserDashboardComponent,
+    canActivate: [AuthGaurdService, UserAuthGaurdService]
+  },
+  {
+    path: 'c/dashboard',
+    component: CompanyDashboardComponent,
+    canActivate: [AuthGaurdService, CompanyAuthGaurdService]
+  },
+  {path: '404', component: Error404Component},
+  {path: '**', redirectTo: '404'},    
 ]
 
 @NgModule({
@@ -47,14 +61,17 @@ const appRoutes: Routes = [
     NavbarComponent,
     FooterComponent,
     UserLoginComponent,
-    DashboardComponent,
+    UserDashboardComponent,
     HomeComponent,
-    AdminHeaderComponent,
-    AdminFooterComponent,
+    DashboardHeaderComponent,
+    DashboardFooterComponent,
     UserProfileComponent,
     UserRegisterComponent,
     CompanyRegisterComponent,
-    CompanyLoginComponent
+    CompanyLoginComponent,
+    CompanyDashboardComponent,
+    NoAccessComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
@@ -68,6 +85,9 @@ const appRoutes: Routes = [
     AuthService,
     AuthGaurdService, 
     UserService,
+    CompanyService,
+    CompanyAuthGaurdService,
+    UserAuthGaurdService,
     ApiUrlService
   ],
   bootstrap: [AppComponent]
