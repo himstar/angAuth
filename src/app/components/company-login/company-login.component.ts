@@ -12,7 +12,9 @@ import { AuthService } from '../../services/auth.service';
 export class CompanyLoginComponent implements OnInit {
 
   invalidLogin: boolean;
-  company: any[];
+  company: any;
+  unexpectedError: boolean = false;
+  loginSuccess: boolean = false;
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
@@ -38,7 +40,10 @@ export class CompanyLoginComponent implements OnInit {
         .subscribe(result => {
           if ((result.message == "success") && (result.token)) {
             localStorage.setItem('token', result.token)
-            this.router.navigate(['c/dashboard']);
+            this.loginSuccess = true;
+            setTimeout(() =>
+              this.router.navigate(['c/dashboard']), 2000
+            );
           }
           else if (result.message == "Unauthorized Access") {
             this.invalidLogin = true;
@@ -46,6 +51,8 @@ export class CompanyLoginComponent implements OnInit {
             this.invalidLogin = true;
             console.log(result);
           }
+        }, error=>{
+          this.unexpectedError = true;
         });
     } else {
       this.company = this.loginForm.value;

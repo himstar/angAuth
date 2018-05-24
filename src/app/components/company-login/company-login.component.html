@@ -1,59 +1,81 @@
 <div class="fixed bottom" id="cookie-bar">
-  <div class="container">
-      <div class="row">
-          <div class="col-sm-3"></div>
-          <div class="col-sm-6 alert alert-danger" *ngIf="(email.touched && email.invalid)">
-              <div *ngIf="email.errors.required || email.errors.email">
-                  <p>Valid email required to access a account</p>
-              </div>
-          </div>
-      </div>
-      <div class="row">
-          <div class="col-sm-3"></div>   
-          <div class="col-sm-6 alert alert-danger" *ngIf="password.touched && password.invalid">
-              <div *ngIf="password.errors.required">
-                  <p>Password required to access a account</p>
-              </div>
-          </div>
-      </div>
-      <div class="row">
-          <div class="col-sm-3"></div>                     
-          <div class="col-sm-6 alert alert-danger" *ngIf="invalidLogin == true">
-              <p>Invalid login, please check your credentials</p>
-          </div>
-          <div class="col-sm-3"></div>                                 
-      </div>
-  </div>
-</div> 
-<main>  
-  <div class="bg_color_2">
-      <div class="container margin_60_35">
-          <div id="login-2">
-              <h1>Please login to rAuth!</h1>
-              <form [(formGroup)]="loginForm" (ngSubmit)="onFormSubmit()">
-                  <div class="box_form clearfix">
-                      <div class="box_login">
-                          <a href="#0" class="social_bt facebook">Login with Facebook</a>
-                          <a href="#0" class="social_bt google">Login with Google</a>
-                          <a href="#0" class="social_bt linkedin">Login with Linkedin</a>
-                      </div>
-                      <div class="box_login last">
-                          <div class="form-group">
-                              <input type="email" class="form-control" formControlName="email" id="email" placeholder="Your email address">
-                          </div>
-                          <div class="form-group">
-                              <input type="password" formControlName="password" id="password" class="form-control" placeholder="Your password">
-                              <a href="#0" class="forgot"><small>Forgot password?</small></a>
-                          </div>
-                          <div class="form-group">
-                              <button type="submit" [disabled]="!loginForm.valid" class="btn_1" > Login Account </button>
-                          </div>
-                      </div>
-                  </div>
-              </form>
-              <p class="text-center link_bright">Do not have an account yet? <a [routerLink]="['/c/register']"><strong>Register now!</strong></a></p>
+    <div class="container">
+        <div class="row" *ngIf="loginSuccess == true">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 alert alert-success">
+                <div>
+                    <p>Login Successful, redirecting to dashboard...</p>
+                </div>
             </div>
-          <!-- /login -->
-      </div>
-  </div>
+        </div>
+        <div class="row" *ngIf="unexpectedError == true">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 alert alert-danger">
+                <div>
+                    <p>Unexpected error, unable to connect the server</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 alert alert-danger" *ngIf="(email.touched && email.invalid)">
+                <div *ngIf="email.errors.required || email.errors.email">
+                    <p>Valid email required to access a account</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 alert alert-danger" *ngIf="password.touched && password.invalid">
+                <div *ngIf="password.errors.required">
+                    <p>Password required to access a account</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 alert alert-danger" *ngIf="invalidLogin == true">
+                <p>Invalid login, please check your credentials</p>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+</div>
+<main>
+    <div class="bg_color_2">
+        <div class="container margin_60_35">
+            <div id="login-2">
+                <h1>Please login to rAuth!</h1>
+                <form [(formGroup)]="loginForm" (ngSubmit)="onFormSubmit()">
+                    <div class="box_form clearfix">
+                        <div class="box_login">
+                            <a href="#0" class="social_bt facebook">Login with Facebook</a>
+                            <a href="#0" class="social_bt google">Login with Google</a>
+                            <a href="#0" class="social_bt linkedin">Login with Linkedin</a>
+                        </div>
+                        <div class="box_login last">
+                            <div class="form-group">
+                                <input type="email" class="form-control" formControlName="email" id="email" placeholder="Your email address">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" formControlName="password" id="password" class="form-control" placeholder="Your password">
+                                <a href="#0" class="forgot">
+                                    <small>Forgot password?</small>
+                                </a>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" [disabled]="!loginForm.valid" class="btn_1"> Login Account </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <p class="text-center link_bright">Do not have an account yet?
+                    <a [routerLink]="['/c/register']">
+                        <strong>Register now!</strong>
+                    </a>
+                </p>
+            </div>
+            <!-- /login -->
+        </div>
+    </div>
 </main>

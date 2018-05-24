@@ -228,7 +228,9 @@ strong {
     font-size: 36px;
     margin: 0
 }
-
+.main-menu li span {
+    color: #e74c84
+}
 @media (max-width:767px) {
     .main_title h2 {
         font-size: 32px;

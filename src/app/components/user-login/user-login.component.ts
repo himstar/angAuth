@@ -12,7 +12,9 @@ import { AuthService } from '../../services/auth.service';
 export class UserLoginComponent implements OnInit {
 
   invalidLogin: boolean;
-  user: any[];
+  user: any;
+  unexpectedError: boolean = false;
+  loginSuccess: boolean = false;
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
@@ -30,15 +32,17 @@ export class UserLoginComponent implements OnInit {
     private router: Router,
     private authService: AuthService
   ) { }
-
   onFormSubmit() {
     if (this.loginForm.valid) {
       this.user = this.loginForm.value;
       this.authService.userLogin(this.user)
         .subscribe(result => {
           if ((result.message == "success") && (result.token)) {
-            localStorage.setItem('token', result.token)
-            this.router.navigate(['u/dashboard']);
+            localStorage.setItem('token', result.token);
+            this.loginSuccess = true;
+            setTimeout(() =>
+              this.router.navigate(['u/dashboard']), 2000
+            );
           }
           else if (result.message == "Unauthorized Access") {
             this.invalidLogin = true;
@@ -46,11 +50,13 @@ export class UserLoginComponent implements OnInit {
             this.invalidLogin = true;
             console.log(result);
           }
+        }, error => {
+          this.unexpectedError = true;
         });
     } else {
       this.user = this.loginForm.value;
     }
-  }  
+  }
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {

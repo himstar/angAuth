@@ -1,7 +1,23 @@
 <div class="fixed bottom" id="cookie-bar">
     <div class="container">
+        <div class="row" *ngIf="registerSuccess == true">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 alert alert-success">
+                <div>
+                    <p>Registration Successful, redirecting to login...</p>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="unexpectedError == true">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 alert alert-danger">
+                <div>
+                    <p>Unexpected error, unable to connect the server</p>
+                </div>
+            </div>
+        </div>
         <div class="row" *ngIf="name.touched && name.invalid">
-            <div class="col-sm-3"></div>           
+            <div class="col-sm-3"></div>
             <div class="col-sm-6 alert alert-danger">
                 <div *ngIf="name.errors.required">
                     <p>Name required for an account</p>
@@ -11,70 +27,73 @@
                 </div>
                 <div *ngIf="name.errors.maxlength">
                     <p>Name Should not exceed more than {{name.errors.maxlength.requiredLength}} character</p>
-                </div>                                    
+                </div>
             </div>
         </div>
         <div class="row" *ngIf="email.touched && email.invalid">
-            <div class="col-sm-3"></div>   
+            <div class="col-sm-3"></div>
             <div class="col-sm-6 alert alert-danger">
                 <div *ngIf="email.errors.required || email.errors.email">
                     <p>A valid email required for an account</p>
-                </div>            
+                </div>
             </div>
         </div>
         <div class="row" *ngIf="password.touched && password.invalid">
-            <div class="col-sm-3"></div>   
+            <div class="col-sm-3"></div>
             <div class="col-sm-6 alert alert-danger">
                 <div *ngIf="password.errors.required">
                     <p>To ensure account safty min 6 digit password required </p>
                 </div>
                 <div *ngIf="password.errors.maxlength">
                     <p>Uff..too long password is difficult to remember, please remove some digits</p>
-                </div>                
+                </div>
             </div>
-        </div>        
+        </div>
         <div class="row">
-            <div class="col-sm-3"></div>                     
+            <div class="col-sm-3"></div>
             <div class="col-sm-6 alert alert-danger" *ngIf="invalidLogin == true">
                 <p>Invalid login, please check your credentials</p>
             </div>
-            <div class="col-sm-3"></div>                                 
+            <div class="col-sm-3"></div>
         </div>
     </div>
-</div> 
+</div>
 <main>
     <div class="bg_color_2">
         <div class="container margin_60_35">
-        <div id="register">
-            <h1>Please register to rAuth!</h1>
-            <div class="row justify-content-center">
-            <div class="col-md-5">
-                <form [(formGroup)]="registerForm" (ngSubmit)="onFormSubmit()">
-                <div class="box_form">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" formControlName="name" placeholder="Your name">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" formControlName="email" placeholder="Your email address">
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" class="form-control" formControlName="password" placeholder="Your password">
-                    </div>
-                    <div id="pass-info" class="clearfix"></div>
-                    <div class="form-group text-center add_top_30">
-                        <button type="submit" class="btn_1" [disabled]="!registerForm.valid"> Register Account </button>
+            <div id="register">
+                <h1>Please register to rAuth!</h1>
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <form [(formGroup)]="registerForm" (ngSubmit)="onFormSubmit()">
+                            <div class="box_form">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" formControlName="name" placeholder="Your name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" formControlName="email" placeholder="Your email address">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" formControlName="password" placeholder="Your password">
+                                </div>
+                                <div id="pass-info" class="clearfix"></div>
+                                <div class="form-group text-center add_top_30">
+                                    <button type="submit" class="btn_1" [disabled]="!registerForm.valid"> Register Account </button>
+                                </div>
+                            </div>
+                            <p class="text-center">
+                                <small>Has voluptua vivendum accusamus cu. Ut per assueverit temporibus dissentiet. Eum no atqui
+                                    putant democritum, velit nusquam sententiae vis no.</small>
+                            </p>
+                        </form>
                     </div>
                 </div>
-                <p class="text-center"><small>Has voluptua vivendum accusamus cu. Ut per assueverit temporibus dissentiet. Eum no atqui putant democritum, velit nusquam sententiae vis no.</small></p>
-                </form>
+                <!-- /row -->
             </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /register -->
+            <!-- /register -->
         </div>
     </div>
 </main>

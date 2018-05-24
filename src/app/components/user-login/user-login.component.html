@@ -1,5 +1,21 @@
 <div class="fixed bottom" id="cookie-bar">
     <div class="container">
+        <div class="row" *ngIf="loginSuccess == true">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 alert alert-success">
+                <div>
+                    <p>Login Successful, redirecting to dashboard...</p>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="unexpectedError == true">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 alert alert-danger">
+                <div>
+                    <p>Unexpected error, unable to connect the server</p>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-6 alert alert-danger" *ngIf="(email.touched && email.invalid)">
@@ -9,7 +25,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3"></div>   
+            <div class="col-sm-3"></div>
             <div class="col-sm-6 alert alert-danger" *ngIf="password.touched && password.invalid">
                 <div *ngIf="password.errors.required">
                     <p>Password required to access a account</p>
@@ -17,15 +33,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3"></div>                     
+            <div class="col-sm-3"></div>
             <div class="col-sm-6 alert alert-danger" *ngIf="invalidLogin == true">
                 <p>Invalid login, please check your credentials</p>
             </div>
-            <div class="col-sm-3"></div>                                 
+            <div class="col-sm-3"></div>
         </div>
     </div>
-</div> 
-<main>  
+</div>
+<main>
     <div class="bg_color_2">
         <div class="container margin_60_35">
             <div id="login-2">
@@ -43,15 +59,21 @@
                             </div>
                             <div class="form-group">
                                 <input type="password" formControlName="password" id="password" class="form-control" placeholder="Your password">
-                                <a href="#0" class="forgot"><small>Forgot password?</small></a>
+                                <a href="#0" class="forgot">
+                                    <small>Forgot password?</small>
+                                </a>
                             </div>
                             <div class="form-group">
-                                <button type="submit" [disabled]="!loginForm.valid" class="btn_1" > Login Account </button>
+                                <button type="submit" [disabled]="!loginForm.valid" class="btn_1"> Login Account </button>
                             </div>
                         </div>
                     </div>
                 </form>
-                <p class="text-center link_bright">Do not have an account yet? <a [routerLink]="['/u/register']"><strong>Register now!</strong></a></p>
+                <p class="text-center link_bright">Do not have an account yet?
+                    <a [routerLink]="['/u/register']">
+                        <strong>Register now!</strong>
+                    </a>
+                </p>
             </div>
             <!-- /login -->
         </div>

@@ -11,7 +11,9 @@ import { AuthService } from '../../services/auth.service';
 })
 export class UserRegisterComponent implements OnInit {
   invalidRegister: boolean;
-  user: any[];
+  user: any;
+  unexpectedError: boolean = false;
+  registerSuccess: boolean = false;
 
   registerForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
@@ -40,19 +42,23 @@ export class UserRegisterComponent implements OnInit {
         this.authService.userRegister(this.user)
         .subscribe(result => {
           if (result.message == "success") {
-              this.router.navigate(['u/login']);
+            this.registerSuccess = true;
+            setTimeout(() =>
+              this.router.navigate(['u/login']), 2000
+            );
           }
           else if(result.message == "alreadyRegistered"){
             this.invalidRegister = true;
           } else {
             this.invalidRegister = true; 
           }
+        }, error => {
+          this.unexpectedError = true;
         });
     } else {
       this.user = this.registerForm.value;
     }
 }
-
   ngOnInit() {
     if(this.authService.isLoggedIn()){
       this.router.navigate(['u/dashboard']);

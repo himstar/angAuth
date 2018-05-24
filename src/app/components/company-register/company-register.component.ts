@@ -12,10 +12,12 @@ import { AuthService } from '../../services/auth.service';
 export class CompanyRegisterComponent implements OnInit {
 
   invalidRegister: boolean;
-  company: any[];
+  company: any;
+  unexpectedError: boolean = false;
+  registerSuccess: boolean = false;
 
   registerForm = new FormGroup({
-    webUrl : new FormControl('', [
+    webUrl: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
       Validators.maxLength(15),
@@ -28,22 +30,22 @@ export class CompanyRegisterComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)])
   });
 
-  get personName(){
+  get personName() {
     return this.registerForm.get('personName');
   }
-  get companyName(){
+  get companyName() {
     return this.registerForm.get('companyName');
   }
-  get webUrl(){
+  get webUrl() {
     return this.registerForm.get('webUrl');
   }
-  get phone(){
+  get phone() {
     return this.registerForm.get('phone');
   }
-  get email(){
+  get email() {
     return this.registerForm.get('email');
   }
-  get password(){
+  get password() {
     return this.registerForm.get('password');
   }
 
@@ -52,28 +54,33 @@ export class CompanyRegisterComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-onFormSubmit() {
-    if(this.registerForm.valid) {
-        this.company = this.registerForm.value;
-        this.authService.companyRegister(this.company)
+  onFormSubmit() {
+    if (this.registerForm.valid) {
+      this.company = this.registerForm.value;
+      this.authService.companyRegister(this.company)
         .subscribe(result => {
           if (result.message == "success") {
-              this.router.navigate(['c/login']);
-          }
-          else if(result.message == "alreadyRegistered"){
-            this.invalidRegister = true;
-          } else {
-            this.invalidRegister = true; 
-          }
-        });
+              this.registerSuccess = true;
+              setTimeout(() =>
+                this.router.navigate(['c/login']), 2000
+              );
+            }
+            else if (result.message == "alreadyRegistered") {
+              this.invalidRegister = true;
+            } else {
+              this.invalidRegister = true;
+            }
+          }, error => {
+            this.unexpectedError = true;
+          });
     } else {
       this.company = this.registerForm.value;
     }
-}
+  }
   ngOnInit() {
-    if(this.authService.isLoggedIn()){
+    if (this.authService.isLoggedIn()) {
       this.router.navigate(['c/dashboard']);
-    }    
+    }
   }
 
 }

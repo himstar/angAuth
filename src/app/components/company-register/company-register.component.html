@@ -1,5 +1,21 @@
 <div class="fixed bottom" id="cookie-bar">
 	<div class="container">
+		<div class="row" *ngIf="registerSuccess == true">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6 alert alert-success">
+				<div>
+					<p>Registration Successful, redirecting to login...</p>
+				</div>
+			</div>
+		</div>
+		<div class="row" *ngIf="unexpectedError == true">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6 alert alert-danger">
+				<div>
+					<p>Unexpected error, unable to connect the server</p>
+				</div>
+			</div>
+		</div>
 		<div class="row" *ngIf="personName.touched && personName.invalid">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-6 alert alert-danger">
@@ -72,7 +88,8 @@
 				<div class="col-lg-6">
 					<h1>It's time to find you!</h1>
 					<p class="lead">Te pri adhuc simul. No eros errem mea. Diam mandamus has ad. Invenire senserit ad has, has ei quis iudico, ad mei nonumes
-						periculis.</p>
+						periculis.
+					</p>
 					<div class="box_feat_2">
 						<i class="pe-7s-map-2"></i>
 						<h3>Let patients to Find you!</h3>

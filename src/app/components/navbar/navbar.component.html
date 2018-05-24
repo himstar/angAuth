@@ -1,4 +1,4 @@
-<header class="header_sticky">	
+<header class="header_sticky">
     <a href="#menu" class="btn_mobile">
         <div class="hamburger hamburger--spin" id="hamburger">
             <div class="hamburger-box">
@@ -11,21 +11,52 @@
         <div class="row">
             <div class="col-lg-3 col-6">
                 <div id="logo">
-                    <a [routerLink]="['']" title="rAuth"><img src="assets/img/logo.png" data-retina="true" alt="" width="163" height="36"></a>
+                    <a [routerLink]="['']" title="rAuth">
+                        <img src="assets/img/logo.png" data-retina="true" alt="" width="163" height="36">
+                    </a>
                 </div>
             </div>
             <div class="col-lg-9 col-6">
-                <ul id="top_access">
-                    <li><a [routerLink]="['u/dashboard']" *ngIf="authService.isLoggedIn()"><i class="pe-7s-user"></i></a></li>
-                    <li><a href="" *ngIf="authService.isLoggedIn()" (click)="authService.logout()"><i class="pe-7s-power"></i></a></li>
-                </ul>
                 <nav id="menu" class="main-menu">
                     <ul>
                         <li>
-                            <span><a [routerLink]="['u/login']" *ngIf="!authService.isLoggedIn()"> for User </a></span>
-                        </li>                        
+                            <span *ngIf="authService.isLoggedIn() && authService.currentUser.userLevel == 0">
+                                    Good to see you! {{authService.currentUser.name}}
+                            </span>
+                        </li>
                         <li>
-                                <span><a [routerLink]="['c/login']" *ngIf="!authService.isLoggedIn()"> for Company </a></span>
+                                <span>
+                                    <a [routerLink]="['u/dashboard']" *ngIf="authService.isLoggedIn() && authService.currentUser.userLevel == 0">
+                                        Account
+                                    </a>
+                                </span>
+                            </li>
+                            <li>
+                                    <span *ngIf="authService.isLoggedIn() && authService.currentCompany.activePlan == 0">
+                                            Good to see you! {{authService.currentCompany.companyName}}
+                                    </span>
+                                </li>                                                    
+                        <li>
+                            <span>
+                                <a [routerLink]="['c/dashboard']" *ngIf="authService.isLoggedIn() && authService.currentCompany.activePlan == 0">
+                                    Account
+                                </a>
+                            </span>
+                        </li>
+                        <li>
+                            <a href="" *ngIf="authService.isLoggedIn()" (click)="authService.logout()">
+                                <i class="pe-7s-power"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <span>
+                                <a [routerLink]="['u/login']" *ngIf="!authService.isLoggedIn()"> for User </a>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <a [routerLink]="['c/login']" *ngIf="!authService.isLoggedIn()"> for Company </a>
+                            </span>
                         </li>
                     </ul>
                 </nav>
