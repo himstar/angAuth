@@ -15,6 +15,7 @@ export class CompanyRegisterComponent implements OnInit {
   company: any;
   unexpectedError: boolean = false;
   registerSuccess: boolean = false;
+  existingUser: boolean = false;
 
   registerForm = new FormGroup({
     webUrl: new FormControl('', [
@@ -67,6 +68,7 @@ export class CompanyRegisterComponent implements OnInit {
             }
             else if (result.message == "alreadyRegistered") {
               this.invalidRegister = true;
+              this.existingUser = true;
             } else {
               this.invalidRegister = true;
             }

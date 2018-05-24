@@ -1,10 +1,30 @@
 <app-dashboard-header></app-dashboard-header>
+<div class="fixed bottom" id="cookie-bar">
+  <div class="container">
+    <div class="row" *ngIf="updateSuccess == true">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6 alert alert-success">
+        <div>
+          <p>Success! data updated</p>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="updateError == true">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6 alert alert-danger">
+        <div>
+          <p>Sorry! provided email id is already registered</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="content-wrapper" *ngIf="userData">
   <div class="container-fluid">
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="#">{{userData[0].name}}'s Dashboard</a>
+        <a>{{userData[0].name}}'s Dashboard</a>
       </li>
       <li class="breadcrumb-item active">View/Modify Profile</li>
     </ol>
@@ -25,57 +45,67 @@
           </div>
         </div>
         <div class="col-md-8 add_top_30">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" value="{{userData[0].name}}" placeholder="Your name">
+          <form [(formGroup)]="updateUserForm" (ngSubmit)="updateFormSubmit()">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="hidden" value="{{userData[0]._id}}" formControlName="userId">
+                  <input type="text" class="form-control" value="{{userData[0].name}}" formControlName="name" placeholder="Your name">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" value="{{userData[0].email}}" class="form-control" placeholder="Your email" readonly>
+                </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Last name</label>
-                <input type="text" class="form-control" placeholder="Your last name">
+            <!-- /row-->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input type="text" class="form-control" value="{{userData[0].phone}}" formControlName="phone" placeholder="Your telephone number">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="sel1">Select Gender</label>
+                  <select class="form-control" value="{{userData[0].gender}}" formControlName="gender">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>No please</option>
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
-          <!-- /row-->
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Phone</label>
-                <input type="text" class="form-control" value="{{userData[0].phone}}" placeholder="Your telephone number">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Country</label>
+                  <input type="text" value="{{userData[0].country}}" class="form-control" formControlName="country" placeholder="Country">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Verify Password</label>
+                  <input type="password" class="form-control" formControlName="password" placeholder="Current Password">
+                </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" value="{{userData[0].email}}" class="form-control" placeholder="Your email" readonly>
+            <div class="row">
+              <div class="col-md-10"></div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <p>
+                    <button type="submit" class="btn_1 medium pull-right"> Save </button>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="sel1">Select Gender</label>
-                <select class="form-control" value="{{userData[0].gender}}">
-                  <option>Male</option>
-                  <option>Female</option>
-                  <option>No please</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Country</label>
-                <input type="text" value="{{userData[0].country}}" class="form-control" placeholder="Country">
-              </div>
-            </div>
-          </div>
-          <p>
-            <button type="submit" class="btn_1 medium pull-right"> Save </button>
-          </p>
-          <!-- /row-->
+            <!-- /row-->
+          </form>
         </div>
       </div>
     </div>
