@@ -28,6 +28,8 @@ import { CompanyAuthGaurdService } from './services/company-auth-gaurd.service';
 import { NoAccessComponent } from './common/no-access/no-access.component';
 import { UserAuthGaurdService } from './services/user-auth-gaurd.service';
 import { Error404Component } from './common/error-404/error-404.component';
+import { ChartsModule } from 'ng2-charts'
+
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -79,7 +81,8 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ChartsModule
   ],
   providers: [
     AuthService,
