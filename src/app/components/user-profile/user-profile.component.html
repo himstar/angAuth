@@ -5,7 +5,7 @@
       <div class="col-sm-3"></div>
       <div class="col-sm-6 alert alert-success">
         <div>
-          <p>Success! data updated</p>
+          <p>Success! profile updated</p>
         </div>
       </div>
     </div>
@@ -13,7 +13,7 @@
       <div class="col-sm-3"></div>
       <div class="col-sm-6 alert alert-danger">
         <div>
-          <p>Sorry! provided email id is already registered</p>
+          <p>Sorry! provided password is wrong</p>
         </div>
       </div>
     </div>
@@ -45,13 +45,12 @@
           </div>
         </div>
         <div class="col-md-8 add_top_30">
-          <form [(formGroup)]="updateUserForm" (ngSubmit)="updateFormSubmit()">
+          <form [(formGroup)]="updateForm" (ngSubmit)="updateFormSubmit()">
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Name</label>
-                  <input type="hidden" value="{{userData[0]._id}}" formControlName="userId">
-                  <input type="text" class="form-control" value="{{userData[0].name}}" formControlName="name" placeholder="Your name">
+                      <input type="text" class="form-control" value="{{userData[0].name}}" formControlName="name" placeholder="Your name">
                 </div>
               </div>
               <div class="col-md-6">

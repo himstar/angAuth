@@ -44,11 +44,10 @@ export class UserLoginComponent implements OnInit {
               this.router.navigate(['u/dashboard']), 2000
             );
           }
-          else if (result.message == "Unauthorized Access") {
+          else if (result.message == "invalidPassword") {
             this.invalidLogin = true;
           } else {
             this.invalidLogin = true;
-            console.log(result);
           }
         }, error => {
           this.unexpectedError = true;

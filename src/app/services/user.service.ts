@@ -20,8 +20,10 @@ export class UserService {
   }
   updateUser(user){
     this.url = this.apiUrl.url;
-    this.port = this.apiUrl.port;    
+    this.port = this.apiUrl.port;
     return this.http.post(this.url+':'+this.port+'/api/user/profile/update', user)
-      .map(response => response.json());
+      .map(response =>
+        response.json()
+      );
   }
 }

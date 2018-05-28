@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { Router } from "@angular/router";
@@ -10,56 +10,59 @@ import { Router } from "@angular/router";
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  user: any;
+  formValues: any;
   userData: any;
+  updateForm: FormGroup;
   updateSuccess: boolean = false;
   updateError: boolean = false;
-  currentUser: any = this.authService.currentUser._id;
+  userId: any = this.authService.currentUser._id;
+  userName: any = this.authService.currentUser.name;
   constructor(
+    private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
     private authService: AuthService
-  ) { }
-
-  updateUserForm = new FormGroup({
-    userId: new FormControl(''),
-    name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
-    phone: new FormControl('', [Validators.minLength(3), Validators.maxLength(15)]),
-    gender: new FormControl(''),
-    country: new FormControl(''),
-    password: new FormControl('', [Validators.required])
-  });
-
-  updateFormSubmit() {
-    if (this.updateUserForm.valid) {
-      this.user = this.updateUserForm.value;
-      this.userService.updateUser(this.user)
-        .subscribe(result => {
-          if (result.message == "success") {
-            this.updateSuccess = true;
-          }
-          else if (result.message == "alreadyRegistered") {
-            this.updateSuccess = true;
-            this.updateError = true;
-          } else {
-            this.updateError = true;
-          }
-        }, error => {
-          this.updateError = true;
-        });
-    } else {
-      this.user = this.updateUserForm.value;
-    }
+  ) {
+    this.updateUserForm();
   }
 
   userDetails() {
-    this.user = this.authService.currentUser._id;
-    this.userService.getUser(this.user)
+    this.userService.getUser(this.userId)
       .subscribe(
         data => {
           this.userData = data.json();
         }
       );
+  }
+  updateUserForm() {
+    this.updateForm = this.fb.group({
+      userId: this.userId,
+      name: ['', Validators.required, Validators.minLength(3), Validators.maxLength(15)],
+      phone: ['', Validators.minLength(3), Validators.maxLength(15)],
+      gender: '',
+      country: '',
+      password: '',
+    });
+  }
+  updateFormSubmit() {
+    this.formValues = this.updateForm.value;
+    console.log(this.formValues);
+    this.userService.updateUser(this.formValues)
+      .subscribe(result => {
+        console.log(result);
+        if (result.message == "success") {
+          this.updateSuccess = true;
+          this.updateError = false;
+        }
+        else if (result.message == "invalid password") {
+          this.updateSuccess = false;
+          this.updateError = true;
+        } else {
+          this.updateError = true;
+        }
+      }, error => {
+        this.updateError = true;
+      });
   }
 
   ngOnInit() {
