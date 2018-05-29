@@ -1,0 +1,168 @@
+<app-dashboard-header></app-dashboard-header>
+<div class="fixed bottom" id="cookie-bar">
+  <div class="container">
+    <div class="row" *ngIf="updateSuccess == true">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6 alert alert-success">
+        <div>
+          <p>Success! profile updated</p>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="updateError == true">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6 alert alert-danger">
+        <div>
+          <p>Sorry! provided password is wrong</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content-wrapper" *ngIf="companyData">
+  <div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a>{{companyData[0].companyName}}'s Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active">View/Modify Profile</li>
+    </ol>
+
+    <form [formGroup]="updateForm" (ngSubmit)="updateFormSubmit()">
+      <div class="box_general padding_bottom">
+        <div class="header_box version_2">
+          <h2>
+            <i class="fa fa-user"></i> {{companyData[0].webUrl}}'s - Profile details</h2>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Your photo</label>
+              <div class="dz-default dz-message">
+                <span>Drop files here to upload</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 add_top_30">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Company Web URL</label>
+                  <input type="text" class="form-control" [(ngModel)]="companyData[0].webUrl" formControlName="webUrl" placeholder="URL address">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Company Name</label>
+                  <input type="text" class="form-control" [(ngModel)]="companyData[0].companyName" formControlName="companyName" placeholder="Your name">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" [(ngModel)]="companyData[0].email" formControlName="email" class="form-control" placeholder="Your email"
+                    readonly>
+                </div>
+              </div>
+            </div>
+            <!-- /row-->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input type="text" class="form-control" [(ngModel)]="companyData[0].phone" formControlName="phone" placeholder="Your telephone number">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="sel1">Managed by</label>
+                  <input type="text" class="form-control" [(ngModel)]="companyData[0].personName" formControlName="personName" placeholder="Company name">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Category</label>
+                  <input type="text" formControlName="category" [(ngModel)]="companyData[0].category" class="form-control" placeholder="Category">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Country</label>
+                  <input type="text" class="form-control" [(ngModel)]="companyData[0].country" formControlName="country" placeholder="Country">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Company Descriptions</label>
+                    <textarea rows="5" class="form-control" [(ngModel)]="companyData[0].description" formControlName="description" style="height:100px;" placeholder="Description"></textarea>
+                  </div>
+                </div>
+              </div>            
+          </div>
+        </div>
+      </div>
+      <div class="box_general padding_bottom">
+        <div class="header_box version_2">
+          <h2>
+            <i class="fa fa-file-text"></i>Social Links</h2>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Facebook</label>
+              <input type="text" formControlName="facebook" [(ngModel)]="companyData[0].facebook" class="form-control" placeholder="Facebook Url">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Twitter</label>
+              <input type="text" class="form-control" [(ngModel)]="companyData[0].twitter" formControlName="twitter" placeholder="Twiiter Url">
+            </div>
+          </div>
+        </div>
+        <!-- /row-->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Linkedin</label>
+              <input type="text" formControlName="linkedin" [(ngModel)]="companyData[0].linkedin" class="form-control" placeholder="Linkedin Url">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Google Plus</label>
+              <input type="text" class="form-control" [(ngModel)]="companyData[0].googlePlus" formControlName="googlePlus" placeholder="GooglePlus Url">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6"></div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Verify Password</label>
+              <input type="password" class="form-control" formControlName="password" placeholder="Current Password" required>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <p>
+                <button type="submit" class="btn_1 medium pull-right"> Save </button>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- /row-->
+      </div>
+    </form>
+    <!-- /box_general-->
+    <!-- /row-->
+  </div>
+</div>
+<app-dashboard-footer></app-dashboard-footer>

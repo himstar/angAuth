@@ -1,115 +1,115 @@
 <app-dashboard-header></app-dashboard-header>
 <div class="fixed bottom" id="cookie-bar">
-  <div class="container">
-    <div class="row" *ngIf="updateSuccess == true">
-      <div class="col-sm-3"></div>
-      <div class="col-sm-6 alert alert-success">
-        <div>
-          <p>Success! profile updated</p>
-        </div>
-      </div>
-    </div>
-    <div class="row" *ngIf="updateError == true">
-      <div class="col-sm-3"></div>
-      <div class="col-sm-6 alert alert-danger">
-        <div>
-          <p>Sorry! provided password is wrong</p>
-        </div>
-      </div>
-    </div>
-  </div>
+ <div class="container">
+   <div class="row" *ngIf="updateSuccess == true">
+     <div class="col-sm-3"></div>
+     <div class="col-sm-6 alert alert-success">
+       <div>
+         <p>Success! profile updated</p>
+       </div>
+     </div>
+   </div>
+   <div class="row" *ngIf="updateError == true">
+     <div class="col-sm-3"></div>
+     <div class="col-sm-6 alert alert-danger">
+       <div>
+         <p>Sorry! provided password is wrong</p>
+       </div>
+     </div>
+   </div>
+ </div>
 </div>
 <div class="content-wrapper" *ngIf="userData">
-  <div class="container-fluid">
-    <!-- Breadcrumbs-->
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a>{{userData[0].name}}'s Dashboard</a>
-      </li>
-      <li class="breadcrumb-item active">View/Modify Profile</li>
-    </ol>
-    <div class="box_general padding_bottom">
-      <div class="header_box version_2">
-        <h2>
-          <i class="fa fa-user"></i>Profile details</h2>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="form-group">
-            <label>Your photo</label>
-            <form action="#" class="dropzone dz-clickable">
-              <div class="dz-default dz-message">
-                <span>Drop files here to upload</span>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="col-md-8 add_top_30">
-          <form [(formGroup)]="updateForm" (ngSubmit)="updateFormSubmit()">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Name</label>
-                      <input type="text" class="form-control" value="{{userData[0].name}}" formControlName="name" placeholder="Your name">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="email" value="{{userData[0].email}}" class="form-control" placeholder="Your email" readonly>
-                </div>
-              </div>
-            </div>
-            <!-- /row-->
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Phone</label>
-                  <input type="text" class="form-control" value="{{userData[0].phone}}" formControlName="phone" placeholder="Your telephone number">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="sel1">Select Gender</label>
-                  <select class="form-control" value="{{userData[0].gender}}" formControlName="gender">
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>No please</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Country</label>
-                  <input type="text" value="{{userData[0].country}}" class="form-control" formControlName="country" placeholder="Country">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Verify Password</label>
-                  <input type="password" class="form-control" formControlName="password" placeholder="Current Password">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-10"></div>
-              <div class="col-md-2">
-                <div class="form-group">
-                  <p>
-                    <button type="submit" class="btn_1 medium pull-right"> Save </button>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- /row-->
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- /box_general-->
-    <!-- /row-->
-  </div>
+ <div class="container-fluid">
+   <!-- Breadcrumbs-->
+   <ol class="breadcrumb">
+     <li class="breadcrumb-item">
+       <a>{{userData[0].name}}'s Dashboard</a>
+     </li>
+     <li class="breadcrumb-item active">View/Modify Profile</li>
+   </ol>
+   <div class="box_general padding_bottom">
+     <div class="header_box version_2">
+       <h2>
+         <i class="fa fa-user"></i>Profile details</h2>
+     </div>
+     <div class="row">
+       <div class="col-md-4">
+         <div class="form-group">
+           <label>Your photo</label>
+           <form action="#" class="dropzone dz-clickable">
+             <div class="dz-default dz-message">
+               <span>Drop files here to upload</span>
+             </div>
+           </form>
+         </div>
+       </div>
+       <div class="col-md-8 add_top_30">
+         <form [formGroup]="updateForm" (ngSubmit)="updateFormSubmit()">
+           <div class="row">
+             <div class="col-md-6">
+               <div class="form-group">
+                 <label>Name</label>
+                     <input type="text" class="form-control" [(ngModel)]="userData[0].name" formControlName="name" placeholder="Your name">
+               </div>
+             </div>
+             <div class="col-md-6">
+               <div class="form-group">
+                 <label>Email</label>
+                 <input type="email" [(ngModel)]="userData[0].email" formControlName="email" class="form-control" placeholder="Your email" readonly>
+               </div>
+             </div>
+           </div>
+           <!-- /row-->
+           <div class="row">
+             <div class="col-md-6">
+               <div class="form-group">
+                 <label>Phone</label>
+                 <input type="text" class="form-control" [(ngModel)]="userData[0].phone" [value]="userData[0].phone" formControlName="phone" placeholder="Your telephone number">
+               </div>
+             </div>
+             <div class="col-md-6">
+               <div class="form-group">
+                 <label for="sel1">Select Gender</label>
+                 <select class="form-control" [(ngModel)]="userData[0].gender" formControlName="gender" name="gender">
+                   <option>Male</option>
+                   <option>Female</option>
+                   <option>No please</option>
+                 </select>
+               </div>
+             </div>
+           </div>
+           <div class="row">
+             <div class="col-md-6">
+               <div class="form-group">
+                 <label>Country</label>
+                 <input type="text" formControlName="country" [(ngModel)]="userData[0].country" class="form-control" placeholder="Country">
+               </div>
+             </div>
+             <div class="col-md-6">
+               <div class="form-group">
+                 <label>Verify Password</label>
+                 <input type="password" class="form-control" formControlName="password" placeholder="Current Password" required>
+               </div>
+             </div>
+           </div>
+           <div class="row">
+             <div class="col-md-10"></div>
+             <div class="col-md-2">
+               <div class="form-group">
+                 <p>
+                   <button type="submit" class="btn_1 medium pull-right"> Save </button>
+                 </p>
+               </div>
+             </div>
+           </div>
+           <!-- /row-->
+         </form>
+       </div>
+     </div>
+   </div>
+   <!-- /box_general-->
+   <!-- /row-->
+ </div>
 </div>
 <app-dashboard-footer></app-dashboard-footer>

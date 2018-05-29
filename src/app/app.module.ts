@@ -28,7 +28,8 @@ import { CompanyAuthGaurdService } from './services/company-auth-gaurd.service';
 import { NoAccessComponent } from './common/no-access/no-access.component';
 import { UserAuthGaurdService } from './services/user-auth-gaurd.service';
 import { Error404Component } from './common/error-404/error-404.component';
-import { ChartsModule } from 'ng2-charts'
+import { ChartsModule } from 'ng2-charts';
+import { CompanyProfileComponent } from './components/company-profile/company-profile.component'
 
 
 const appRoutes: Routes = [
@@ -48,6 +49,11 @@ const appRoutes: Routes = [
     component: UserDashboardComponent,
     canActivate: [AuthGaurdService, UserAuthGaurdService]
   },
+  {
+    path: 'c/profile',
+    component: CompanyProfileComponent,
+    canActivate: [AuthGaurdService, CompanyAuthGaurdService]
+  },  
   {
     path: 'c/dashboard',
     component: CompanyDashboardComponent,
@@ -73,7 +79,8 @@ const appRoutes: Routes = [
     CompanyLoginComponent,
     CompanyDashboardComponent,
     NoAccessComponent,
-    Error404Component
+    Error404Component,
+    CompanyProfileComponent
   ],
   imports: [
     BrowserModule,

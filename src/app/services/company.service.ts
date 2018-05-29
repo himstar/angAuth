@@ -18,4 +18,12 @@ export class CompanyService {
     this.port = this.apiUrl.port;    
     return this.http.get(this.url+':'+this.port+'/api/company/'+company);
   }
+  updateCompany(company){
+    this.url = this.apiUrl.url;
+    this.port = this.apiUrl.port;
+    return this.http.post(this.url+':'+this.port+'/api/company/profile/update', company)
+      .map(response =>
+        response.json()
+      );
+  }  
 }
