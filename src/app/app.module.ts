@@ -31,6 +31,7 @@ import { Error404Component } from './common/error-404/error-404.component';
 import { ChartsModule } from 'ng2-charts';
 import { CompanyProfileComponent } from './components/company-profile/company-profile.component'
 
+import { ImageUploadModule } from "angular2-image-upload";
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -80,7 +81,7 @@ const appRoutes: Routes = [
     CompanyDashboardComponent,
     NoAccessComponent,
     Error404Component,
-    CompanyProfileComponent
+    CompanyProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,6 +90,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
+    ImageUploadModule.forRoot(),
     ChartsModule
   ],
   providers: [

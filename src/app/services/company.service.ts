@@ -25,5 +25,13 @@ export class CompanyService {
       .map(response =>
         response.json()
       );
-  }  
+  }
+  updateProfileImage(imageData){
+    this.url = this.apiUrl.url;
+    this.port = this.apiUrl.port;
+    return this.http.post(this.url+':'+this.port+'/api/company/profile/image/update', imageData)
+      .map(response =>
+        response.json()
+      );
+  }      
 }

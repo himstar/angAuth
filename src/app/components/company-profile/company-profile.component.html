@@ -1,19 +1,19 @@
 <app-dashboard-header></app-dashboard-header>
 <div class="fixed bottom" id="cookie-bar">
   <div class="container">
-    <div class="row" *ngIf="updateSuccess == true">
+    <div class="row" *ngIf="updateStatus.active == true">
       <div class="col-sm-3"></div>
       <div class="col-sm-6 alert alert-success">
         <div>
-          <p>Success! profile updated</p>
+          <p>{{updateStatus.message}}</p>
         </div>
       </div>
     </div>
-    <div class="row" *ngIf="updateError == true">
+    <div class="row" *ngIf="updateStatus.active == false">
       <div class="col-sm-3"></div>
       <div class="col-sm-6 alert alert-danger">
         <div>
-          <p>Sorry! provided password is wrong</p>
+          <p>{{updateStatus.message}}</p>
         </div>
       </div>
     </div>
@@ -28,22 +28,43 @@
       </li>
       <li class="breadcrumb-item active">View/Modify Profile</li>
     </ol>
-
+    <div class="box_general padding_bottom">
+      <div class="header_box version_2">
+        <h2>
+          <img *ngIf="companyData[0].logo != null" src="{{companyData[0].logo}}" class="profileImg img-responsive">
+          <img *ngIf="companyData[0].logo == null" src="assets/img/faces/face-0.jpg" class="profileImg img-responsive"> Company Logo
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Your photo</label>
+            <image-upload (uploadFinished)="imageUpload($event)" class="imgUpload" [buttonCaption]="'Select Image!'" [dropBoxMessage]="'or Drop your images here!'"
+              [extensions]="['jpg','png', 'jpeg']" [maxFileSize]="104800"></image-upload>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <p>
+              <button type="button" class="btn_1 medium pull-right" (click)="profileImageUpate()"> Update Logo </button>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- /row-->
+    </div>
     <form [formGroup]="updateForm" (ngSubmit)="updateFormSubmit()">
       <div class="box_general padding_bottom">
         <div class="header_box version_2">
           <h2>
-            <i class="fa fa-user"></i> {{companyData[0].webUrl}}'s - Profile details</h2>
+            <i class="fa fa-file-text"></i> Update Company
+          </h2>
         </div>
         <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Your photo</label>
-              <div class="dz-default dz-message">
-                <span>Drop files here to upload</span>
-              </div>
-            </div>
-          </div>
           <div class="col-md-12 add_top_30">
             <div class="row">
               <div class="col-md-12">
@@ -98,13 +119,14 @@
               </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Company Descriptions</label>
-                    <textarea rows="5" class="form-control" [(ngModel)]="companyData[0].description" formControlName="description" style="height:100px;" placeholder="Description"></textarea>
-                  </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Company Descriptions</label>
+                  <textarea rows="5" class="form-control" [(ngModel)]="companyData[0].description" formControlName="description" style="height:100px;"
+                    placeholder="Description"></textarea>
                 </div>
-              </div>            
+              </div>
+            </div>
           </div>
         </div>
       </div>

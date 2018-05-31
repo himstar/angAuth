@@ -26,4 +26,12 @@ export class UserService {
         response.json()
       );
   }
+  updateProfileImage(imageData){
+    this.url = this.apiUrl.url;
+    this.port = this.apiUrl.port;
+    return this.http.post(this.url+':'+this.port+'/api/user/profile/image/update', imageData)
+      .map(response =>
+        response.json()
+      );
+  }  
 }
