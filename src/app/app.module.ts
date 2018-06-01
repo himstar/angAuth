@@ -32,6 +32,7 @@ import { ChartsModule } from 'ng2-charts';
 import { CompanyProfileComponent } from './components/company-profile/company-profile.component'
 
 import { ImageUploadModule } from "angular2-image-upload";
+import { CompanyFrontComponent } from './components/company-front/company-front.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -40,6 +41,10 @@ const appRoutes: Routes = [
   {path: 'c/register', component: CompanyRegisterComponent},
   {path: 'c/login', component: CompanyLoginComponent},
   {path: 'no-access', component: NoAccessComponent},
+  {
+    path: 'company/:webUrl',
+    component: CompanyFrontComponent
+  },
   {
     path: 'u/profile',
     component: UserProfileComponent,
@@ -82,6 +87,7 @@ const appRoutes: Routes = [
     NoAccessComponent,
     Error404Component,
     CompanyProfileComponent,
+    CompanyFrontComponent,
   ],
   imports: [
     BrowserModule,
