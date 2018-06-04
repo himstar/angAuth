@@ -482,7 +482,10 @@ a.btn_1.outline:hover {
     color: #fff;
     outline: none;
 }
-
+.btn_review {
+    color: #fff !important;
+    background: #248479;
+}
 footer,
 header {
     background-color: #fff

@@ -1,3 +1,326 @@
-<p>
-  company-front works!
-</p>
+<main style="transform: none;">
+  <div id="breadcrumb">
+    <div class="container">
+      <ul>
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Category</a>
+        </li>
+        <li>Page active</li>
+      </ul>
+    </div>
+  </div>
+  <!-- /breadcrumb -->
+
+  <div class="container margin_60" style="transform: none;">
+    <div class="row" style="transform: none;">
+
+      <aside class="col-xl-3 col-lg-4" id="sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+
+        <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; transform: none; top: 0px; left: 396.5px;">
+          <div class="box_profile">
+            <figure>
+              <img src="{{results[0].logo}}" alt="" class="img-fluid img-responsive">
+            </figure>
+            <small>{{results[0].category}}</small>
+            <h1>{{results[0].companyName}}</h1>
+            <span class="rating">
+              <i class="icon_star voted"></i>
+              <i class="icon_star voted"></i>
+              <i class="icon_star voted"></i>
+              <i class="icon_star voted"></i>
+              <i class="icon_star"></i>
+              <small>(145)</small>
+              <a href="badges.html" data-toggle="tooltip" data-placement="top" data-original-title="Badge Level" class="badge_list_1">
+                <img src="img/badges/badge_1.svg" width="15" height="15" alt="">
+              </a>
+            </span>
+            <ul class="statistic">
+              <li>854 Views</li>
+              <li>124 Patients</li>
+            </ul>
+            <ul class="contacts">
+              <li>
+                <h6>Address</h6>{{results[0].location}}</li>
+              <li>
+                <h6>Phone</h6>
+                <a href="tel://{{results[0].phone}}">{{results[0].phone}}</a>
+              </li>
+            </ul>
+            <div class="text-center">
+              <a href="https://www.google.com/maps/dir//Assistance+%E2%80%93+H%C3%B4pitaux+De+Paris,+3+Avenue+Victoria,+75004+Paris,+Francia/@48.8606548,2.3348734,14z/data=!4m15!1m6!3m5!1s0x0:0xa6a9af76b1e2d899!2sAssistance+%E2%80%93+H%C3%B4pitaux+De+Paris!8m2!3d48.8568376!4d2.3504305!4m7!1m0!1m5!1m1!1s0x47e67031f8c20147:0xa6a9af76b1e2d899!2m2!1d2.3504327!2d48.8568361"
+                class="btn_1 outline" target="_blank">
+                <i class="icon_pin"></i> View on map</a>
+            </div>
+          </div>
+          <div class="resize-sensor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; z-index: -1; visibility: hidden;">
+            <div class="resize-sensor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;">
+              <div style="position: absolute; left: 0px; top: 0px; transition: 0s; width: 295px; height: 780px;"></div>
+            </div>
+            <div class="resize-sensor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;">
+              <div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <!-- /asdide -->
+
+      <div class="col-xl-9 col-lg-8">
+
+        <div class="tabs_styled_2">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-expanded="true"
+                aria-selected="false">General info</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active show" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="true">Reviews</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active show" class="btn btn_review"> 
+                Add your review for {{results[0].companyName}}</a>
+            </li>            
+          </ul>
+          <!--/nav-tabs -->
+
+          <div class="tab-content">
+
+            <div class="tab-pane fade" id="general" role="tabpanel" aria-labelledby="general-tab">
+              <p class="lead add_bottom_30">{{results[0].description}}</p>
+              <div class="indent_title_in">
+                <i class="pe-7s-user"></i>
+                <h3>Professional statement</h3>
+                <p>Mussum ipsum cacilds, vidis litro abertis.</p>
+              </div>
+
+              <hr>
+
+              <div class="indent_title_in">
+                <i class="pe-7s-cash"></i>
+                <h3>Prices &amp; Payments</h3>
+                <p>Mussum ipsum cacilds, vidis litro abertis.</p>
+              </div>
+              <div class="wrapper_indent">
+                <p>Zril causae ancillae sit ea. Dicam veritus mediocritatem sea ex, nec id agam eius. Te pri facete latine salutandi,
+                  scripta mediocrem et sed, cum ne mundi vulputate. Ne his sint graeco detraxit, posse exerci volutpat has
+                  in.</p>
+                <table class="table table-responsive table-striped">
+                  <thead>
+                    <tr>
+                      <th>Service - Visit</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>New patient visit</td>
+                      <td>$34</td>
+                    </tr>
+                    <tr>
+                      <td>General consultation</td>
+                      <td>$60</td>
+                    </tr>
+                    <tr>
+                      <td>Back Pain</td>
+                      <td>$40</td>
+                    </tr>
+                    <tr>
+                      <td>Diabetes Consultation</td>
+                      <td>$55</td>
+                    </tr>
+                    <tr>
+                      <td>Eating disorder</td>
+                      <td>$60</td>
+                    </tr>
+                    <tr>
+                      <td>Foot Pain</td>
+                      <td>$35</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--  End wrapper_indent -->
+
+            </div>
+            <!-- /tab_2 -->
+
+            <div class="tab-pane fade active show" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+              <div class="reviews-container">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <div id="review_summary">
+                      <strong>4.7</strong>
+                      <div class="rating">
+                        <i class="icon_star voted"></i>
+                        <i class="icon_star voted"></i>
+                        <i class="icon_star voted"></i>
+                        <i class="icon_star voted"></i>
+                        <i class="icon_star"></i>
+                      </div>
+                      <small>Based on 4 reviews</small>
+                    </div>
+                  </div>
+                  <div class="col-lg-9">
+                    <div class="row">
+                      <div class="col-lg-10 col-9">
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                      <div class="col-lg-2 col-3">
+                        <small>
+                          <strong>5 stars</strong>
+                        </small>
+                      </div>
+                    </div>
+                    <!-- /row -->
+                    <div class="row">
+                      <div class="col-lg-10 col-9">
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                      <div class="col-lg-2 col-3">
+                        <small>
+                          <strong>4 stars</strong>
+                        </small>
+                      </div>
+                    </div>
+                    <!-- /row -->
+                    <div class="row">
+                      <div class="col-lg-10 col-9">
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                      <div class="col-lg-2 col-3">
+                        <small>
+                          <strong>3 stars</strong>
+                        </small>
+                      </div>
+                    </div>
+                    <!-- /row -->
+                    <div class="row">
+                      <div class="col-lg-10 col-9">
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                      <div class="col-lg-2 col-3">
+                        <small>
+                          <strong>2 stars</strong>
+                        </small>
+                      </div>
+                    </div>
+                    <!-- /row -->
+                    <div class="row">
+                      <div class="col-lg-10 col-9">
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: 0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                      <div class="col-lg-2 col-3">
+                        <small>
+                          <strong>1 stars</strong>
+                        </small>
+                      </div>
+                    </div>
+                    <!-- /row -->
+                  </div>
+                </div>
+                <!-- /row -->
+
+                <hr>
+
+                <div class="review-box clearfix">
+                  <figure class="rev-thumb">
+                    <img src="https://www.shareicon.net/data/128x128/2016/07/26/802007_man_512x512.png" alt="">
+                  </figure>
+                  <div class="rev-content">
+                    <div class="rating">
+                      <i class="icon_star voted"></i>
+                      <i class="icon_star voted"></i>
+                      <i class="icon_star voted"></i>
+                      <i class="icon_star voted"></i>
+                      <i class="icon_star"></i>
+                    </div>
+                    <div class="rev-info">
+                      Admin – April 03, 2016:
+                    </div>
+                    <div class="rev-text">
+                      <p>
+                        Sed eget turpis a pede tempor malesuada. Vivamus quis mi at leo pulvinar hendrerit. Cum sociis natoque penatibus et magnis
+                        dis
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- /review-box -->
+
+                <div class="review-box clearfix">
+                  <figure class="rev-thumb">
+                    <img src="https://www.shareicon.net/data/128x128/2016/07/26/802007_man_512x512.png" alt="">
+                  </figure>
+                  <div class="rev-content">
+                    <div class="rating">
+                      <i class="icon-star voted"></i>
+                      <i class="icon_star voted"></i>
+                      <i class="icon_star voted"></i>
+                      <i class="icon_star voted"></i>
+                      <i class="icon_star"></i>
+                    </div>
+                    <div class="rev-info">
+                      Ahsan – April 01, 2016
+                    </div>
+                    <div class="rev-text">
+                      <p>
+                        Sed eget turpis a pede tempor malesuada. Vivamus quis mi at leo pulvinar hendrerit. Cum sociis natoque penatibus et magnis
+                        dis
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- End review-box -->
+
+                <div class="review-box clearfix">
+                  <figure class="rev-thumb">
+                    <img src="https://www.shareicon.net/data/128x128/2016/07/26/802007_man_512x512.png" alt="">
+                  </figure>
+                  <div class="rev-content">
+                    <div class="rating">
+                      <i class="icon-star voted"></i>
+                      <i class="icon_star voted"></i>
+                      <i class="icon_star voted"></i>
+                      <i class="icon_star voted"></i>
+                      <i class="icon_star"></i>
+                    </div>
+                    <div class="rev-info">
+                      Sara – March 31, 2016
+                    </div>
+                    <div class="rev-text">
+                      <p>
+                        Sed eget turpis a pede tempor malesuada. Vivamus quis mi at leo pulvinar hendrerit. Cum sociis natoque penatibus et magnis
+                        dis
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- End review-box -->
+
+              </div>
+              <!-- End review-container -->
+            </div>
+            <!-- /tab_3 -->
+          </div>
+          <!-- /tab-content -->
+        </div>
+        <!-- /tabs_styled -->
+      </div>
+      <!-- /col -->
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</main>

@@ -33,6 +33,8 @@ import { CompanyProfileComponent } from './components/company-profile/company-pr
 
 import { ImageUploadModule } from "angular2-image-upload";
 import { CompanyFrontComponent } from './components/company-front/company-front.component';
+import { AddReviewComponent } from './components/add-review/add-review.component';
+import { NoCompanyComponent } from './common/no-company/no-company.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -41,6 +43,8 @@ const appRoutes: Routes = [
   {path: 'c/register', component: CompanyRegisterComponent},
   {path: 'c/login', component: CompanyLoginComponent},
   {path: 'no-access', component: NoAccessComponent},
+  {path: 'company/add-review', component: AddReviewComponent},
+  {path: 'company-not-found', component: NoCompanyComponent},
   {
     path: 'company/:webUrl',
     component: CompanyFrontComponent
@@ -88,6 +92,8 @@ const appRoutes: Routes = [
     Error404Component,
     CompanyProfileComponent,
     CompanyFrontComponent,
+    AddReviewComponent,
+    NoCompanyComponent,
   ],
   imports: [
     BrowserModule,
