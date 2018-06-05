@@ -37,53 +37,51 @@ export class CompanyProfileComponent implements OnInit {
     this.companyImageData = event.src;
     this.imgSize = event.file.size;
     this.imgType = event.file.type;
-  }  
+  }
   profileImageUpate() {
     if (this.imgSize > 204800) {
       this.updateStatus["message"] = "Please select an image less tha 200 KB";
       this.updateStatus["active"] = false;
     } else if (this.imgType == 'image/jpeg' || this.imgType == 'image/png') {
       this.companyService.updateProfileImage({ companyId: this.companyId, logo: this.companyImageData })
-        .subscribe(result => {
-          console.log(result);
+        .subscribe(response => {
+          let result = response.json();
           if (result.message == "success") {
-            this.updateStatus["message"] = "Logo uploaded Successfully";
-            this.updateStatus["active"] = true;
+            this.messageReturn("Logo uploaded Successfully", true);
           }
           else if (result.message == "invalid company") {
-            this.updateStatus["message"] = "Logo uploaded failed";
-            this.updateStatus["active"] = false;
+            this.messageReturn("Logo update failed", false);
           } else {
-            this.updateStatus["message"] = "Logo update failed";
-            this.updateStatus["active"] = false;
+            this.messageReturn("Logo update failed", false);
           }
         }, error => {
-          this.updateStatus["message"] = "Server Error";
-          this.updateStatus["active"] = false;
+          this.messageReturn("Server Error", false);
         });
     } else {
-      this.updateStatus["message"] = "Please select an valid image type .jpg or .png";
-      this.updateStatus["active"] = false;
+      this.messageReturn("Please select an valid image type .jpg or .png", false);
     }
   }
+
+  messageReturn(message, status){
+    this.updateStatus["message"] = message;
+    this.updateStatus["active"] = status;   
+  }
+
   updateFormSubmit() {
     this.formValues = this.updateForm.value;
     this.companyService.updateCompany(this.formValues)
-      .subscribe(result => {
+      .subscribe(response => {
+        let result = response.json();
         if (result.message == "success") {
-          this.updateStatus["message"] = "Profile updated successfully";
-          this.updateStatus["active"] = true;
+          this.messageReturn("Profile updated successfully", true);
         }
         else if (result.message == "invalid password") {
-          this.updateStatus["message"] = "Invalid Password";
-          this.updateStatus["active"] = false; 
+          this.messageReturn("Invalid Password", false);
         } else {
-          this.updateStatus["message"] = "Profile update failed";
-          this.updateStatus["active"] = false;
+          this.messageReturn("Profile update failed", false);
         }
       }, error => {
-        this.updateStatus["message"] = "Server Error";
-        this.updateStatus["active"] = false;
+        this.messageReturn("Server Error", false);
       });
   }
 
@@ -99,12 +97,11 @@ export class CompanyProfileComponent implements OnInit {
       'googlePlus': new FormControl(null),
       'twitter': new FormControl(null),
       'linkedin': new FormControl(null),
-      'description': new FormControl(null),                        
+      'description': new FormControl(null),
       'phone': new FormControl('', [Validators.minLength(3), Validators.maxLength(15)]),
       'country': new FormControl(null),
       'category': new FormControl(null),
       'password': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     });
   }
-
 }

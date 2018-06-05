@@ -7,8 +7,9 @@ import { ApiUrlService } from '../config/api-url.service';
 
 @Injectable()
 export class AuthService {
-  url : any;
-  port: Number;
+  url = this.apiUrl.url;
+  port = this.apiUrl.port;  
+  serverUrl = this.url+':'+this.port;
   constructor(
     private http: Http,
     private router: Router,
@@ -16,30 +17,24 @@ export class AuthService {
   ) { }
 
   userRegister(user){
-    this.url = this.apiUrl.url;
-    this.port = this.apiUrl.port;
-    return this.http.post(this.url+':'+this.port+'/api/user/register', user)
+    return this.http.post(this.serverUrl+'/api/user/register', user)
       .map(response => response.json());
   }
 
-  userLogin(user){
-    this.url = this.apiUrl.url;
-    this.port = this.apiUrl.port;    
-    return this.http.post(this.url+':'+this.port+'/api/user/login', user)
+  userLogin(user){  
+    return this.http.post(this.serverUrl+'/api/user/login', user)
       .map(response => response.json());
   }
 
   companyRegister(company){
-    this.url = this.apiUrl.url;
-    this.port = this.apiUrl.port;
-    return this.http.post(this.url+':'+this.port+'/api/company/register', company)
+    return this.http.post(this.serverUrl+'/api/company/register', company)
       .map(response => response.json());
   }
 
   companyLogin(company){
     this.url = this.apiUrl.url;
     this.port = this.apiUrl.port;    
-    return this.http.post(this.url+':'+this.port+'/api/company/login', company)
+    return this.http.post(this.serverUrl+'/api/company/login', company)
       .map(response => response.json());
   }
 

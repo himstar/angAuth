@@ -14,7 +14,7 @@
   </div>
   <!-- /breadcrumb -->
 
-  <div class="container margin_60" style="transform: none;">
+  <div class="container margin_60" style="transform: none;" *ngIf="results">
     <div class="row" style="transform: none;">
 
       <aside class="col-xl-3 col-lg-4" id="sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
@@ -79,7 +79,7 @@
               <a class="nav-link active show" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="true">Reviews</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active show" class="btn btn_review"> 
+              <a class="nav-link active show" class="btn btn_review" (click)="addReview()"> 
                 Add your review for {{results[0].companyName}}</a>
             </li>            
           </ul>

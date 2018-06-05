@@ -35,6 +35,8 @@ import { ImageUploadModule } from "angular2-image-upload";
 import { CompanyFrontComponent } from './components/company-front/company-front.component';
 import { AddReviewComponent } from './components/add-review/add-review.component';
 import { NoCompanyComponent } from './common/no-company/no-company.component';
+import { MiddlewareService } from './services/middleware.service';
+import { ReviewService } from './services/review.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -112,7 +114,9 @@ const appRoutes: Routes = [
     CompanyService,
     CompanyAuthGaurdService,
     UserAuthGaurdService,
-    ApiUrlService
+    ApiUrlService,
+    MiddlewareService,
+    ReviewService
   ],
   bootstrap: [AppComponent]
 })

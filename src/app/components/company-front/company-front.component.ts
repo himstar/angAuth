@@ -1,6 +1,8 @@
-import { Component, OnInit,  Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from '../../services/company.service';
+import { MiddlewareService } from '../../services/middleware.service';
 
 @Component({
   selector: 'app-company-front',
@@ -9,17 +11,20 @@ import { CompanyService } from '../../services/company.service';
 })
 export class CompanyFrontComponent implements OnInit {
 
-  results: Object[];
+  results: any;
   constructor(
      private route: ActivatedRoute,
      private router: Router,
-     private companyService: CompanyService
+     private companyService: CompanyService,
+     private middleWareService: MiddlewareService
   ) {}
 
-  @Input()
-  count: number = 0;  
-
-  ngOnInit() {
+  addReview(){
+    this.middleWareService.reviewUrl = this.results[0].webUrl;
+    this.middleWareService.currentUrlId = this.results[0]._id;
+    this.router.navigate(['/company/add-review']);
+  }
+  getCompanyDetails(){
     this.route.paramMap
     .subscribe(paramas =>{
       var companyUrl = paramas['params'].webUrl;
@@ -32,6 +37,9 @@ export class CompanyFrontComponent implements OnInit {
           }
         }
       );  
-    });
+    });  
+  }  
+  ngOnInit() {
+    this.getCompanyDetails();
   }
 }

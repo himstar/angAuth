@@ -6,37 +6,24 @@ import { ApiUrlService } from '../config/api-url.service';
 
 @Injectable()
 export class CompanyService {
-  url : any;
-  port: Number;
+  url = this.apiUrl.url;
+  port = this.apiUrl.port;  
+  serverUrl = this.url+':'+this.port;
   constructor(
     private http: Http,
     private router: Router,
     private apiUrl: ApiUrlService    
   ) { }
-  getCompany(company){
-    this.url = this.apiUrl.url;
-    this.port = this.apiUrl.port;    
-    return this.http.get(this.url+':'+this.port+'/api/company/'+company);
+  getCompany(company){ 
+    return this.http.get(this.serverUrl+'/api/company/'+company);
   }
-  getCompanyByUrl(webUrl){
-    this.url = this.apiUrl.url;
-    this.port = this.apiUrl.port;    
-    return this.http.get(this.url+':'+this.port+'/api/company/url/'+webUrl);
+  getCompanyByUrl(webUrl){    
+    return this.http.get(this.serverUrl+'/api/company/url/'+webUrl);
   }  
   updateCompany(company){
-    this.url = this.apiUrl.url;
-    this.port = this.apiUrl.port;
-    return this.http.post(this.url+':'+this.port+'/api/company/profile/update', company)
-      .map(response =>
-        response.json()
-      );
+    return this.http.post(this.serverUrl+'/api/company/profile/update', company);
   }
   updateProfileImage(imageData){
-    this.url = this.apiUrl.url;
-    this.port = this.apiUrl.port;
-    return this.http.post(this.url+':'+this.port+'/api/company/profile/image/update', imageData)
-      .map(response =>
-        response.json()
-      );
-  }      
+    return this.http.post(this.serverUrl+'/api/company/profile/image/update', imageData);
+  }       
 }
