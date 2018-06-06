@@ -25,5 +25,8 @@ export class CompanyService {
   }
   updateProfileImage(imageData){
     return this.http.post(this.serverUrl+'/api/company/profile/image/update', imageData);
-  }       
+  }
+  assignReview(reviewId){
+    return this.http.post(this.serverUrl+'/api/company/profile/review/add', reviewId);
+  }         
 }

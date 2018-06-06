@@ -28,5 +28,8 @@ export class UserService {
       .map(response =>
         response.json()
       );
-  }  
+  }
+  assignReview(reviewId){
+    return this.http.post(this.serverUrl+'/api/user/profile/review/add', reviewId);
+  }         
 }

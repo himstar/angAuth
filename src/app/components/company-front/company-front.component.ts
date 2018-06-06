@@ -22,7 +22,8 @@ export class CompanyFrontComponent implements OnInit {
   addReview(){
     this.middleWareService.reviewUrl = this.results[0].webUrl;
     this.middleWareService.currentUrlId = this.results[0]._id;
-    this.router.navigate(['/company/add-review']);
+    this.middleWareService.currentCompanyName = this.results[0].companyName;
+    this.router.navigate(['/company/add-review/'+this.results[0].webUrl]);
   }
   getCompanyDetails(){
     this.route.paramMap

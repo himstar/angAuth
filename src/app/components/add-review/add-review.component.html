@@ -1,4 +1,59 @@
-<p>
-  add-review works!
-  <button (click)="addReview()"> Add Review </button>
-</p>
+<div class="fixed bottom" id="cookie-bar">
+  <div class="container">
+    <div class="row" *ngIf="updateStatus.active == true">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6 alert alert-success">
+        <div>
+          <p>{{updateStatus.message}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="updateStatus.active == false">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6 alert alert-danger">
+        <div>
+          <p>{{updateStatus.message}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<main>
+  <div class="bg_color_2">
+    <div class="container margin_60_35">
+      <div id="register">
+        <h1>Share your opinion for {{currentCompanyName}} now</h1>
+        <div class="row justify-content-center">
+          <div class="col-md-5">
+            <form [formGroup]="reviewData" (ngSubmit)="addReview()">
+              <div class="box_form">
+                <div class="form-group">
+                  <label>Rating Value</label>
+                  <input type="number" formControlName="rating" class="form-control" placeholder="Rating Value">
+                </div>
+                <div class="form-group">
+                  <label>Review Title</label>
+                  <input type="text" formControlName="reviewTitle" class="form-control" placeholder="Review Title">
+                </div>
+                <div class="form-group">
+                  <label>Review</label>
+                  <textarea class="form-control" formControlName="reviewText" placeholder="Say what you love or hate about {{currentCompanyName}}"
+                    rows="4" cols="50"></textarea>
+                </div>
+                <div class="form-group text-center add_top_30">
+                  <input class="btn_1" type="submit" value="Submit">
+                </div>
+              </div>
+              <p class="text-center">
+                <small>Has voluptua vivendum accusamus cu. Ut per assueverit temporibus dissentiet. Eum no atqui putant democritum,
+                  velit nusquam sententiae vis no.</small>
+              </p>
+            </form>
+          </div>
+        </div>
+        <!-- /row -->
+      </div>
+      <!-- /register -->
+    </div>
+  </div>
+</main>

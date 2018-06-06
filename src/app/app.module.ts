@@ -45,7 +45,7 @@ const appRoutes: Routes = [
   {path: 'c/register', component: CompanyRegisterComponent},
   {path: 'c/login', component: CompanyLoginComponent},
   {path: 'no-access', component: NoAccessComponent},
-  {path: 'company/add-review', component: AddReviewComponent},
+  {path: 'company/add-review/:webUrl', component: AddReviewComponent},
   {path: 'company-not-found', component: NoCompanyComponent},
   {
     path: 'company/:webUrl',

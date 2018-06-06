@@ -5,6 +5,7 @@ export class MiddlewareService {
 
   reviewUrl: String;
   currentUrlId: String;
+  currentCompanyName: String;
   
   constructor() { }
   
