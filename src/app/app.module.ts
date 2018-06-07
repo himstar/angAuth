@@ -95,7 +95,7 @@ const appRoutes: Routes = [
     CompanyProfileComponent,
     CompanyFrontComponent,
     AddReviewComponent,
-    NoCompanyComponent,
+    NoCompanyComponent
   ],
   imports: [
     BrowserModule,

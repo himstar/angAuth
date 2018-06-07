@@ -19,9 +19,9 @@ export class AddReviewComponent implements OnInit {
   userSelectedUrl: String;
   currentCompanyId: String;
   currentCompanyName: String;
-  currentUser = this.authService.currentUser['_id'];
+  currentUser: String;
   updateStatus: Object = { active: null, message: null, css: null };
-  
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -41,20 +41,24 @@ export class AddReviewComponent implements OnInit {
     'reviewText': new FormControl('', [Validators.minLength(12), Validators.maxLength(455)]),
     'reviewTitle': new FormControl('', [Validators.minLength(12), Validators.maxLength(455)]),
     'rating': new FormControl('', [Validators.required])
-  });  
+  });
+  selectedRating(rating: number): void {
+    this.reviewData.controls['rating'].setValue(rating);
+  }  
   addReview() {
     this.formValues = this.reviewData.value;
-    console.log(this.formValues);
-    if (this.companyVerified == true) {
+    if (this.companyVerified == true && this.currentUser != 'not-loggedin') {
       this.reviewService.addReview(this.formValues)
         .subscribe(response => {
           let result = response.json();
-          console.log(result);
           if (result.message == "success") {
             this.messageReturn("Review added successfully", true);
+            setTimeout(() =>
+              this.router.navigate(['u/dashboard']), 1500
+            );
             let companyReviewData = {
               companyId: this.currentCompanyId,
-              reviewId: result['0']._id
+              reviewId: result.review._id
             }
             this.companyService.assignReview(companyReviewData)
               .subscribe(companyReviewResponse => {
@@ -62,19 +66,24 @@ export class AddReviewComponent implements OnInit {
               });
             let userReviewData = {
               userId: this.currentUser,
-              reviewId: result['0']._id
+              reviewId: result.review._id
             }
             this.userService.assignReview(userReviewData)
               .subscribe(companyReviewResponse => {
                 companyReviewResponse = companyReviewResponse.json();
               });
           } else {
-            this.messageReturn("Something Went wrong", false);
+            this.messageReturn("Please enter the fields", false);
           }
         }, error => {
           this.messageReturn("Server Error", false);
           console.log(error);
         });
+    } else {
+      this.messageReturn("Please log in first to post a review, redirecting...", false);
+      setTimeout(() =>
+      this.router.navigate(['u/login']), 2000
+    );
     }
   }
   verifyCompany() {
@@ -82,6 +91,7 @@ export class AddReviewComponent implements OnInit {
       .subscribe(paramas => {
         var companyUrl = paramas['params'].webUrl;
         if (this.userSelectedUrl == companyUrl) {
+          this.reviewData.controls['companyId'].setValue(this.middleWareService.currentUrlId);
           this.companyVerified = true;
         } else {
           this.companyService.getCompanyByUrl(companyUrl)
@@ -93,7 +103,7 @@ export class AddReviewComponent implements OnInit {
                 } else {
                   this.currentCompanyName = this.results['0'].companyName;
                   this.currentCompanyId = this.results['0']._id;
-                  console.log(this.currentCompanyId);
+                  this.reviewData.controls['companyId'].setValue(this.currentCompanyId);
                   this.companyVerified = true;
                 }
               }
@@ -105,7 +115,12 @@ export class AddReviewComponent implements OnInit {
     this.userSelectedUrl = this.middleWareService.reviewUrl;
     this.currentCompanyId = this.middleWareService.currentUrlId;
     this.currentCompanyName = this.middleWareService.currentCompanyName;
-    this.verifyCompany();        
+    if(this.authService.isLoggedIn() == false){
+      this.currentUser = 'not-loggedin';
+    } else { 
+      this.currentUser = this.authService.currentUser['_id'];   
+    }
+    this.verifyCompany();
   }
 
 }

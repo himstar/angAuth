@@ -2174,6 +2174,18 @@ a.wish_bt:hover:after {
     color: #FFC107
 }
 
+.rating i.m {
+    color: #ddd;
+    font-size: 25px;
+    width: 1.08571429em
+}
+.rating i.voted {
+    color: #ffc107;
+}
+.rating i.m:hover {
+    color: #ffc107;
+    cursor: pointer;
+}
 .rating small {
     margin-bottom: 0;
     display: inline-block;
@@ -2185,7 +2197,39 @@ a.wish_bt:hover:after {
     color: #999;
     text-decoration: underline
 }
+.add-rating {
+    width: 165px;
+}
 
+.add-rating > input { display: none; } 
+.add-rating > label:before { 
+  margin: 10px 5px 10px 0;
+  font-size: 30px;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.add-rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.add-rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.add-rating > input:checked ~ label {color: #019924; cursor: pointer}
+.add-rating:not(:checked) > label:hover, /* hover current star */
+.add-rating:not(:checked) > label:hover ~ label {color: #FFD700; cursor: pointer} /* hover previous stars in list */
+
+.add-rating > input:checked + label:hover, /* hover current star when changing rating */
+.add-rating > input:checked ~ label:hover {color: #019924; cursor: pointer}
+.add-rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.add-rating > input:checked ~ label:hover ~ label {color: #FFED85; cursor: pointer} 
 .infoBox {
     padding-right: 50px!important
 }
