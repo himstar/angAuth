@@ -37,6 +37,8 @@ import { AddReviewComponent } from './components/add-review/add-review.component
 import { NoCompanyComponent } from './common/no-company/no-company.component';
 import { MiddlewareService } from './services/middleware.service';
 import { ReviewService } from './services/review.service';
+import { CompanySearchService } from './services/search/company-search.service';
+import { CompanySearchPipe } from './filters/company-search.pipe';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -95,7 +97,8 @@ const appRoutes: Routes = [
     CompanyProfileComponent,
     CompanyFrontComponent,
     AddReviewComponent,
-    NoCompanyComponent
+    NoCompanyComponent,
+    CompanySearchPipe
   ],
   imports: [
     BrowserModule,
@@ -116,7 +119,8 @@ const appRoutes: Routes = [
     UserAuthGaurdService,
     ApiUrlService,
     MiddlewareService,
-    ReviewService
+    ReviewService,
+    CompanySearchService
   ],
   bootstrap: [AppComponent]
 })

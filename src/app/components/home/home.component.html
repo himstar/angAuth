@@ -5,35 +5,18 @@
 			<p>
 				Read most trusted real reviews. Write reviews. Shop smarter.
 			</p>
-			<form method="post" action="#">
 				<div id="custom-search-input">
 					<div class="input-group">
-						<input type="text" class=" search-query" placeholder="Ex. Cyberin reviews....">
-						<input type="submit" class="btn_search" value="Search">
+						<input type="text" class=" search-query" [(ngModel)]="queryString" placeholder="Ex. Cyberin reviews...." (keyup)="searchCompany(queryString)">
 						<div id="searchResult">
-							<ul class="searchList">
-								<li>
-									<a href="#">Company Name</a>
+							<ul class="searchList" *ngIf="queryString && queryString.length > 2">
+								<li *ngFor="let company of results | searchFilter: queryString : 'companyName'">
+									<a routerLink="company/{{company.webUrl}}"> {{company.companyName}} </a>
 								</li>							
 							</ul>
 						</div>
 					</div>
-					<ul>
-						<li>
-							<input type="radio" id="all" name="radio_search" value="all" checked>
-							<label for="all">All</label>
-						</li>
-						<li>
-							<input type="radio" id="doctor" name="radio_search" value="doctor">
-							<label for="doctor">Users</label>
-						</li>
-						<li>
-							<input type="radio" id="clinic" name="radio_search" value="clinic">
-							<label for="clinic">Company</label>
-						</li>
-					</ul>
 				</div>
-			</form>
 		</div>
 	</div>
 	<!-- /Hero -->
