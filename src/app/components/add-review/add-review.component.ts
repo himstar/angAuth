@@ -13,6 +13,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./add-review.component.css']
 })
 export class AddReviewComponent implements OnInit {
+
   formValues: any;
   results: any;
   companyVerified: Boolean;
@@ -21,6 +22,7 @@ export class AddReviewComponent implements OnInit {
   currentCompanyName: String;
   currentUser: String;
   updateStatus: Object = { active: null, message: null, css: null };
+  isCompany: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,46 +46,50 @@ export class AddReviewComponent implements OnInit {
   });
   selectedRating(rating: number): void {
     this.reviewData.controls['rating'].setValue(rating);
-  }  
+  }
   addReview() {
     this.formValues = this.reviewData.value;
     if (this.companyVerified == true && this.currentUser != 'not-loggedin') {
-      this.reviewService.addReview(this.formValues)
-        .subscribe(response => {
-          let result = response.json();
-          if (result.message == "success") {
-            this.messageReturn("Review added successfully", true);
-            setTimeout(() =>
-              this.router.navigate(['u/dashboard']), 1500
-            );
-            let companyReviewData = {
-              companyId: this.currentCompanyId,
-              reviewId: result.review._id
+      if (this.isCompany == 0) {
+        this.messageReturn("A company can't add a review", false);
+      } else {
+        this.reviewService.addReview(this.formValues)
+          .subscribe(response => {
+            let result = response.json();
+            if (result.message == "success") {
+              this.messageReturn("Review added successfully", true);
+              setTimeout(() =>
+                this.router.navigate(['u/dashboard']), 1500
+              );
+              let companyReviewData = {
+                companyId: this.currentCompanyId,
+                reviewId: result.review._id
+              }
+              this.companyService.assignReview(companyReviewData)
+                .subscribe(companyReviewResponse => {
+                  companyReviewResponse = companyReviewResponse.json();
+                });
+              let userReviewData = {
+                userId: this.currentUser,
+                reviewId: result.review._id
+              }
+              this.userService.assignReview(userReviewData)
+                .subscribe(companyReviewResponse => {
+                  companyReviewResponse = companyReviewResponse.json();
+                });
+            } else {
+              this.messageReturn("Please enter the fields", false);
             }
-            this.companyService.assignReview(companyReviewData)
-              .subscribe(companyReviewResponse => {
-                companyReviewResponse = companyReviewResponse.json();
-              });
-            let userReviewData = {
-              userId: this.currentUser,
-              reviewId: result.review._id
-            }
-            this.userService.assignReview(userReviewData)
-              .subscribe(companyReviewResponse => {
-                companyReviewResponse = companyReviewResponse.json();
-              });
-          } else {
-            this.messageReturn("Please enter the fields", false);
-          }
-        }, error => {
-          this.messageReturn("Server Error", false);
-          console.log(error);
-        });
+          }, error => {
+            this.messageReturn("Server Error", false);
+            console.log(error);
+          });
+      }
     } else {
       this.messageReturn("Please log in first to post a review, redirecting...", false);
       setTimeout(() =>
-      this.router.navigate(['u/login']), 2000
-    );
+        this.router.navigate(['u/login']), 2000
+      );
     }
   }
   verifyCompany() {
@@ -115,10 +121,11 @@ export class AddReviewComponent implements OnInit {
     this.userSelectedUrl = this.middleWareService.reviewUrl;
     this.currentCompanyId = this.middleWareService.currentUrlId;
     this.currentCompanyName = this.middleWareService.currentCompanyName;
-    if(this.authService.isLoggedIn() == false){
+    if (this.authService.isLoggedIn() == false) {
       this.currentUser = 'not-loggedin';
-    } else { 
-      this.currentUser = this.authService.currentUser['_id'];   
+    } else {
+      this.currentUser = this.authService.currentUser['_id'];
+      this.isCompany = this.authService.currentCompany.activePlan;
     }
     this.verifyCompany();
   }
